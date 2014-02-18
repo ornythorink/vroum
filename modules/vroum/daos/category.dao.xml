@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dao xmlns="http://jelix.org/ns/dao/1.0">
+    <datasources>
+        <primarytable name="categories" realname="categories" primarykey="id_categorie" />
+    </datasources>
+    <record>
+        <property name="id_categorie" fieldname="id_categorie" datatype="int" autoincrement="true"/>
+        <property name="name_categorie" fieldname="name_categorie" datatype="varchar" required="true" maxlength="255"/>
+        <property name="tag" fieldname="tag" datatype="varchar" default="" maxlength="255"/>
+        <property name="priorite" fieldname="priorite" datatype="int" required="true" default="4"/>
+        <property name="actif" fieldname="actif" datatype="tinyint" required="true"/>
+        <property name="order" fieldname="order" datatype="tinyint" required="true"/>
+        <property name="id_source" fieldname="id_source" datatype="char" required="true"/>
+        <property name="id_parent" fieldname="id_parent" datatype="smallint" required="true"/>
+        <property name="id_seo" fieldname="id_seo" datatype="tinyint" required="true"/>
+        <property name="special" fieldname="special" datatype="char" default="N"/>
+        <property name="relatedKeyword" fieldname="relatedKeyword" datatype="varchar" required="true" maxlength="255"/>
+        <!--<property name="" fieldname="" datatype="string/int/float/date"
+        required="yes" maxlength="" minlength="" regexp="" sequence=""
+        updatepattern="" insertpattern="" selectpattern=""/>-->
+    </record>
+    <factory>
+        <!--<method name="findByStage" type="select/selectfirst/delete/update/php">
+            <parameter name="" />
+            <values>
+                <value property="" value="" />
+            </values>
+            <conditions logic="and/or">
+                <eq property="" value="" />
+            </conditions>
+            <order>
+                <orderitem property="" way="asc/desc" />
+            </order>
+            <limit offset="" count=""/>
+            <body><![CDATA[
+            ]]></body>
+        </method>-->
+    </factory>
+</dao>
