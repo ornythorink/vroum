@@ -19,6 +19,7 @@ class categoryCtrl extends jController {
 	   $maFactory = jDao::get("category");
 	   
    	   $type = $_GET['type'];
+
 	   // récupération d'une liste complète de records de type foo
 	   $conditions = jDao::createConditions();
 	   $conditions->addCondition('actif','=',1);

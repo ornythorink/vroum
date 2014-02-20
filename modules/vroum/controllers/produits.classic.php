@@ -47,4 +47,54 @@ class produitsCtrl extends jController {
 		$resp->data = $data;	 
 		 return $resp;
     }
+
+    function home() {
+    	$resp = $this->getResponse('json');
+    
+    	jClasses::inc('vroum~shopping');
+    	
+    	$xmlstring = Shopping::getProductByKeyword($term, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
+    	
+    	$sxe = simplexml_load_string($xmlstring, 'SimpleXMLIterator');
+    	
+    	if($sxe !== false){
+    		$i = 0;
+    		foreach(new RecursiveIteratorIterator($sxe, 1) as $name => $data) {
+    			if($data->items->offer !== null){
+    				foreach($data->items->offer as $d){
+    					
+    					if(false != (string) $d->imageList->image[4]["available"]) {
+    						$liste[$i]['image'] = (string) $d->imageList->image[4]->sourceURL ;
+    					} else if (false != (string) $d->imageList->image[3]["available"]) {
+    						$liste[$i]['image'] = (string) $d->imageList->image[3]->sourceURL;
+    					} else if (false != (string) $d->imageList->image[2]["available"]) {
+    						$liste[$i]['image'] = (string) $d->imageList->image[2]->sourceURL ;
+    					} else if (false != (string) $d->imageList->image[1]["available"]) {
+    						$liste[$i]['image'] = (string) $d->imageList->image[1]->sourceURL ;
+    					} else if (false != (string) $d->imageList->image[0]["available"]) {
+    						$liste[$i]['image'] = (string) $d->imageList->image[0]->sourceURL ;
+    					}
+    					$liste[$i]['name'] = (string) $d->name ;
+    					$liste[$i]['url'] = (string)  $d->offerURL ;
+    					$liste[$i]['prix'] =  (string) $d->basePrice ;
+    				$i++;	
+    				}
+    			}
+    				
+    		}
+    	
+    	}		
+    
+    	$data = array();
+    	foreach ($liste as $row) {
+    		// $row contient un enregistrement
+    		$data[] = array( 'nom'=> $row['name'] ,'prix'=> $row['prix'], 'url' => $row['url'],
+    				'longimage' => $row['image'] , 'mediumimage' => $row['image'], 'petiteimage' => $row['image']);
+    
+    	}
+    	$resp->data = $data;
+    	return $resp;
+    }    
+    
+    
 }
