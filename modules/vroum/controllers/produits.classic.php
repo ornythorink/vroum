@@ -43,9 +43,56 @@ class produitsCtrl extends jController {
 		   			'longimage' => $row->longimage, 'mediumimage' => $row->mediumimage, 'petiteimage' => $row->petiteimage,
 					'long_description' => $row->long_description);
 
-	    }		 
-		$resp->data = $data;	 
-		 return $resp;
+	    }	
+
+
+	    jClasses::inc('vroum~shopping');
+	     
+	    $xmlstring = Shopping::getProductHome($term, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
+	     
+	    $sxe = simplexml_load_string($xmlstring, 'SimpleXMLIterator');
+	     
+	    if($sxe !== false){
+	    	$i = 0;
+	    	foreach(new RecursiveIteratorIterator($sxe, 1) as $name => $item) {
+	    		if($item->items->offer !== null){
+	    			foreach($item->items->offer as $d){
+	    					
+	    				if(false != (string) $d->imageList->image[4]["available"]) {
+	    					$ws[$i]['image'] = (string) $d->imageList->image[4]->sourceURL ;
+	    				} else if (false != (string) $d->imageList->image[3]["available"]) {
+	    					$ws[$i]['image'] = (string) $d->imageList->image[3]->sourceURL;
+	    				} else if (false != (string) $d->imageList->image[2]["available"]) {
+	    					$ws[$i]['image'] = (string) $d->imageList->image[2]->sourceURL ;
+	    				} else if (false != (string) $d->imageList->image[1]["available"]) {
+	    					$ws[$i]['image'] = (string) $d->imageList->image[1]->sourceURL ;
+	    				} else if (false != (string) $d->imageList->image[0]["available"]) {
+	    					$ws[$i]['image'] = (string) $d->imageList->image[0]->sourceURL ;
+	    				}
+	    				$ws[$i]['name'] = (string) $d->name ;
+	    				$ws[$i]['url'] = (string)  $d->offerURL ;
+	    				$ws[$i]['prix'] =  (string) $d->basePrice ;
+	    				$ws[$i]['description'] =  (string) $d->description ;
+	    				$i++;
+	    			}
+	    		}
+	    
+	    	}
+	    	 
+	    }
+
+	    foreach ($ws as $ligne) {
+	    	// $row contient un enregistrement
+	    	$data2[] = array( 'id_produit'=> null , 'nom'=> $ligne['name'] ,'prix'=> $ligne['prix'], 'url' => $ligne['url'],
+	    			'longimage' => $ligne['image'] , 'mediumimage' => $ligne['image'], 'petiteimage' => $ligne['image'],
+	    			'long_description' => $ligne['description']);
+	    
+	    }	    
+
+	    $reponse = array_merge($data,$data2);	    
+		shuffle($reponse);
+		$resp->data = $reponse;	 
+		return $resp;
     }
 
     function home() {
