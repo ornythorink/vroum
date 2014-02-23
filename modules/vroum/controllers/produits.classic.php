@@ -53,7 +53,7 @@ class produitsCtrl extends jController {
     
     	jClasses::inc('vroum~shopping');
     	
-    	$xmlstring = Shopping::getProductByKeyword($term, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
+    	$xmlstring = Shopping::getProductHome('soutien gorge', $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
     	
     	$sxe = simplexml_load_string($xmlstring, 'SimpleXMLIterator');
     	

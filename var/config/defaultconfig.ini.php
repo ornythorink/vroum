@@ -8,7 +8,7 @@ startAction="default:index"
 locale=en_US
 availableLocales=en_US
 charset=UTF-8
-
+imagecache=/home/ornythorink/htdocs/linge/linge
 ; see http://www.php.net/manual/en/timezones.php for supported values
 timeZone="Europe/Paris"
 

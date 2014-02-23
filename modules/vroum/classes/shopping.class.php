@@ -140,6 +140,29 @@ class Shopping
         $shopping = RestClient::get(self::getHost() . self::$_request, $params );
         return $shopping->getResponse();
     }
+    
+    public function getProductHome(  $keyword , $ua , $ip )
+    {
+        $params = array(
+                "apiKey"=> self::$_apiKey ,
+                "trackingId"=> self::$_trackingId,
+                "keyword"=> $keyword,
+                "categoryId"=>"96667",
+                "numItems" => "6",
+                "showProductOffers" => "false",
+                "numOffersPerProduct"=>"20",
+                "showProductSpecs"=>"true",
+                "visitorUserAgent"=> $ua,
+                "visitorIPAddress"=> $ip,            
+                "showProductsWithoutOffers"=>"false"
+                
+                ) ; 
+    	   
+        $shopping = RestClient::get(self::getHost() . self::$_request, $params );
+        return $shopping->getResponse();	
+    	
+    }
+    
 
     public static function getProductById( $id )
     {
