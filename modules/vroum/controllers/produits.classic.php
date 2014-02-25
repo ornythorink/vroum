@@ -30,8 +30,7 @@ class produitsCtrl extends jController {
                    			MATCH (nom, long_description)  AGAINST('".$term2."' IN  BOOLEAN MODE) 
                    GROUP BY nom 
                    ORDER BY Relevance DESC
-                   LIMIT 0 , 12";
-			   
+                   LIMIT 0 , 12";  
          $res  = $cnx->query($query);
          $liste = $res->fetchAll();	   
 			
@@ -41,8 +40,7 @@ class produitsCtrl extends jController {
 	      // $row contient un enregistrement
 	      $data[] = array( 'id_produit'=> $row->id_produit, 'nom'=> $row->nom ,'prix'=> $row->prix, 'url' => $row->url,
 		   			'longimage' => $row->longimage, 'mediumimage' => $row->mediumimage, 'petiteimage' => $row->petiteimage,
-					'long_description' => $row->long_description);
-
+					'long_description' => $row->long_description,'imagecache' => $row->imagecache);
 	    }	
 
 
@@ -85,7 +83,7 @@ class produitsCtrl extends jController {
 	    	// $row contient un enregistrement
 	    	$data2[] = array( 'id_produit'=> null , 'nom'=> $ligne['name'] ,'prix'=> $ligne['prix'], 'url' => $ligne['url'],
 	    			'longimage' => $ligne['image'] , 'mediumimage' => $ligne['image'], 'petiteimage' => $ligne['image'],
-	    			'long_description' => $ligne['description']);
+	    			'long_description' => $ligne['description'],'imagecache' => null);
 	    
 	    }	    
 
@@ -136,7 +134,8 @@ class produitsCtrl extends jController {
     	foreach ($liste as $row) {
     		// $row contient un enregistrement
     		$data[] = array( 'nom'=> $row['name'] ,'prix'=> $row['prix'], 'url' => $row['url'],
-    				'longimage' => $row['image'] , 'mediumimage' => $row['image'], 'petiteimage' => $row['image']);
+    				'longimage' => $row['image'] , 'mediumimage' => $row['image'], 'petiteimage' => $row['image'],
+    				'imagecache' => null);
     
     	}
     	$resp->data = $data;

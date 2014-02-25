@@ -25,11 +25,11 @@ class Shopping
             if(strstr($_SERVER["HTTP_HOST"] , "localhost" )  ){
                 self::$_host  = 'http://sandbox.api.ebaycommercenetwork.com';
             }else{    
-                self::$_host  = 'http://sandbox.api.ebaycommercenetwork.com';
+                self::$_host  = 'http://api.ebaycommercenetwork.com';
 
             }
         }else{
-            self::$_host  = 'http://sandbox.api.ebaycommercenetwork.com'; 
+            self::$_host  = 'http://api.ebaycommercenetwork.com'; 
         }
         return self::$_host ;
     }
