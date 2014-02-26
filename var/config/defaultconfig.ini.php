@@ -8,10 +8,10 @@ startAction="default:index"
 locale=en_US
 availableLocales=en_US
 charset=UTF-8
-imagecache=/home/ornythorink/htdocs/linge/linge
-sdcurl=http://sandbox.api.ebaycommercenetwork.com
-;imagecache=/home/ornythorink/linge/linge/linge
-;sdcurl=http://api.ebaycommercenetwork.com
+;imagecache=/home/ornythorink/htdocs/linge/linge
+;sdcurl=http://sandbox.api.ebaycommercenetwork.com
+imagecache=/home/ornythorink/linge/linge/linge
+sdcurl=http://api.ebaycommercenetwork.com
 
 
 
