@@ -40,9 +40,10 @@ class produitsCtrl extends jController {
 	      // $row contient un enregistrement
 	      $data[] = array( 'id_produit'=> $row->id_produit, 'nom'=> $row->nom ,'prix'=> $row->prix, 'url' => $row->url,
 		   			'longimage' => $row->longimage, 'mediumimage' => $row->mediumimage, 'petiteimage' => $row->petiteimage,
-					'long_description' => $row->long_description,'imagecache' => $row->imagecache, 'store' => ucfirst($row->boutique) );
+					'long_description' => $row->long_description,'imagecache' => $row->imagecache, 
+	      		    'store' => ucfirst($row->boutique) , 'source' => $row->source );
 	    }	
-
+		
 
 	    jClasses::inc('vroum~shopping');
 	     
@@ -84,8 +85,8 @@ class produitsCtrl extends jController {
 	    	// $row contient un enregistrement
 	    	$data2[] = array( 'id_produit'=> null , 'nom'=> $ligne['name'] ,'prix'=> $ligne['prix'], 'url' => $ligne['url'],
 	    			'longimage' => $ligne['image'] , 'mediumimage' => $ligne['image'], 'petiteimage' => $ligne['image'],
-	    			'long_description' => $ligne['description'],'imagecache' => null, 'store' => $ligne['store']);
-	    
+	    			'long_description' => $ligne['description'],'imagecache' => null, 'store' => $ligne['store'],
+	    			'source' => 'SDC');
 	    }	    
 
 	    $reponse = array_merge($data,$data2);  
@@ -137,7 +138,7 @@ class produitsCtrl extends jController {
     		// $row contient un enregistrement
     		$data[] = array( 'nom'=> $row['name'] ,'prix'=> $row['prix'], 'url' => $row['url'],
     				'longimage' => $row['image'] , 'mediumimage' => $row['image'], 'petiteimage' => $row['image'],
-    				'imagecache' => null, 'store' => $row['store']);
+    				'imagecache' => null, 'store' => $row['store'], 'source' => 'SDC');
     
     	}
     	$resp->data = $data;
