@@ -30,7 +30,7 @@ class produitsCtrl extends jController {
                    			MATCH (nom, long_description)  AGAINST('".$term2."' IN  BOOLEAN MODE) 
                    GROUP BY nom 
                    ORDER BY Relevance DESC
-                   LIMIT 0 , 12";  
+                   LIMIT 0 , 20";  
          $res  = $cnx->query($query);
          $liste = $res->fetchAll();	   
 			
@@ -40,13 +40,13 @@ class produitsCtrl extends jController {
 	      // $row contient un enregistrement
 	      $data[] = array( 'id_produit'=> $row->id_produit, 'nom'=> $row->nom ,'prix'=> $row->prix, 'url' => $row->url,
 		   			'longimage' => $row->longimage, 'mediumimage' => $row->mediumimage, 'petiteimage' => $row->petiteimage,
-					'long_description' => $row->long_description,'imagecache' => $row->imagecache);
+					'long_description' => $row->long_description,'imagecache' => $row->imagecache, 'store' => ucfirst($row->boutique) );
 	    }	
 
 
 	    jClasses::inc('vroum~shopping');
 	     
-	    $xmlstring = Shopping::getProductHome($term, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
+	    $xmlstring = Shopping::getByKeyword($term, $_SERVER['HTTP_USER_AGENT'], $_SERVER['REMOTE_ADDR']);
 	     
 	    $sxe = simplexml_load_string($xmlstring, 'SimpleXMLIterator');
 	     
@@ -71,6 +71,7 @@ class produitsCtrl extends jController {
 	    				$ws[$i]['url'] = (string)  $d->offerURL ;
 	    				$ws[$i]['prix'] =  (string) $d->basePrice ;
 	    				$ws[$i]['description'] =  (string) $d->description ;
+	    				$ws[$i]['store'] =  (string) $d->store->name;
 	    				$i++;
 	    			}
 	    		}
@@ -83,11 +84,11 @@ class produitsCtrl extends jController {
 	    	// $row contient un enregistrement
 	    	$data2[] = array( 'id_produit'=> null , 'nom'=> $ligne['name'] ,'prix'=> $ligne['prix'], 'url' => $ligne['url'],
 	    			'longimage' => $ligne['image'] , 'mediumimage' => $ligne['image'], 'petiteimage' => $ligne['image'],
-	    			'long_description' => $ligne['description'],'imagecache' => null);
+	    			'long_description' => $ligne['description'],'imagecache' => null, 'store' => $ligne['store']);
 	    
 	    }	    
 
-	    $reponse = array_merge($data,$data2);	    
+	    $reponse = array_merge($data,$data2);  
 		shuffle($reponse);
 		$resp->data = $reponse;	 
 		return $resp;
@@ -122,6 +123,7 @@ class produitsCtrl extends jController {
     					$liste[$i]['name'] = (string) $d->name ;
     					$liste[$i]['url'] = (string)  $d->offerURL ;
     					$liste[$i]['prix'] =  (string) $d->basePrice ;
+    					$liste[$i]['store'] =  (string) $d->store->name;
     				$i++;	
     				}
     			}
@@ -135,7 +137,7 @@ class produitsCtrl extends jController {
     		// $row contient un enregistrement
     		$data[] = array( 'nom'=> $row['name'] ,'prix'=> $row['prix'], 'url' => $row['url'],
     				'longimage' => $row['image'] , 'mediumimage' => $row['image'], 'petiteimage' => $row['image'],
-    				'imagecache' => null);
+    				'imagecache' => null, 'store' => $row['store']);
     
     	}
     	$resp->data = $data;

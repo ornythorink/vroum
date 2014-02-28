@@ -1,5 +1,10 @@
 temp/*
 lib/*
-www/cache/*
-application.init.php
+linge/www/cache/*
+linge/application.init.php
+linge/var/upload/*
+linge/var/log/errors.log
+linge/var/log/messages.log
+linge/var/config/defaultconfig.ini.php
+linge/var/config/profiles.ini.php
 

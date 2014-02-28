@@ -44,7 +44,7 @@ class Shopping
                 "trackingId"=> self::$_trackingId,
                 "keyword"=> $keyword,
                 "categoryId"=>"96667",
-                "numItems" => "60",
+                "numItems" => "20",
                 "showProductOffers" => "true",
                 "numOffersPerProduct"=>"20",
                 "showProductSpecs"=>"true",
@@ -136,7 +136,7 @@ class Shopping
                 "showProductsWithoutOffers"=>"false"
                 
                 ) ; 
-    	   
+  
         $shopping = RestClient::get(self::getHost() . self::$_request, $params );
         return $shopping->getResponse();
     }
@@ -157,7 +157,7 @@ class Shopping
                 "showProductsWithoutOffers"=>"false"
                 
                 ) ; 
-    	   
+
         $shopping = RestClient::get(self::getHost() . self::$_request, $params );
         return $shopping->getResponse();	
     	

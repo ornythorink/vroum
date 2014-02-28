@@ -80,6 +80,7 @@ class RestClient {
              
          }
         //debug 
+         //var_dump($this->url);  exit();
         //echo $this->url ."<br/>";
         return $this->url;
      }

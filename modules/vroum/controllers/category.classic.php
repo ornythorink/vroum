@@ -35,7 +35,8 @@ class categoryCtrl extends jController {
 	   $data = array();
 	   foreach ($liste as $row) {
 	      // $row contient un enregistrement
-	      $data[] = array( 'id_categorie'=> $row->id_categorie, 'id_parent'=> $row->id_parent,'name_categorie'=> $row->name_categorie);
+	      $data[] = array( 'id_categorie'=> $row->id_categorie, 'id_parent'=> $row->id_parent,
+	      		'name_categorie'=> $row->name_categorie, 'tag' => $row->tag );
 
 	   }		 
 		$resp->data = $data;	 
