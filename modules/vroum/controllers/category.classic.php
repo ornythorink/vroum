@@ -25,8 +25,12 @@ class categoryCtrl extends jController {
 	   $conditions->addCondition('actif','=',1);
 	   if($type == 'parent'){
 	   		$conditions->addCondition('id_parent','=',0);
-	   } elseif ($type == 'child') {
+	   } else if ($type == 'child') {
 		   $conditions->addCondition('id_parent','!=',0);
+		   $conditions->addCondition('priorite','=',4);
+	   } else if ($type == 'sub') {
+		   $conditions->addCondition('id_parent','!=',0);
+		   $conditions->addCondition('priorite','=',6);
 	   }
 	   	   
 	   $conditions->addItemOrder('order','asc');

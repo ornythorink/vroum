@@ -44,7 +44,7 @@ class Shopping
                 "trackingId"=> self::$_trackingId,
                 "keyword"=> $keyword,
                 "categoryId"=>"96667",
-                "numItems" => "20",
+                "numItems" => "1",
                 "showProductOffers" => "true",
                 "numOffersPerProduct"=>"20",
                 "showProductSpecs"=>"true",
