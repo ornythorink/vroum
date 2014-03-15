@@ -98,11 +98,11 @@ class produitsCtrl extends jController {
 
          $query = "
                    SELECT * , 
-                   			MATCH(nom, long_description)
+                   			MATCH(nom, long_description,categorie_marchand)
                    					AGAINST ('".$term."') as Relevance 
                    FROM produits 
                    WHERE 
-                   			MATCH (nom, long_description)  AGAINST('".$term2."' IN  BOOLEAN MODE) 
+                   			MATCH (nom, long_description,categorie_marchand)  AGAINST('".$term2."' IN  BOOLEAN MODE) 
                    AND imagecache != '' 
                    GROUP BY nom 
                    ORDER BY Relevance DESC 
